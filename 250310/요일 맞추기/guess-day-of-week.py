@@ -21,7 +21,7 @@ if is_forward:
             elif month == m2:
                 duration = duration + d2
             else:
-                duration = num_of_days[month]
+                duration = duration + num_of_days[month]
 else:
     if m1 == m2:
         duration = d1 - d2
@@ -32,7 +32,7 @@ else:
             elif month == m1:
                 duration = duration + d1
             else:
-                duration = num_of_days[month]
+                duration = duration + num_of_days[month]
 
 if is_forward:
     print(days[duration % 7])
