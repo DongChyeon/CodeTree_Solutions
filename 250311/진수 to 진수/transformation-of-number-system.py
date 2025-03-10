@@ -20,6 +20,6 @@ def from_decimal_to_base(n, b):
         digits.append(str(number % b))
         number //= b
     
-    return ''.join(digits)
+    return ''.join(digits[::-1])
 
 print(from_decimal_to_base(from_base_to_decimal(n, a), b))
