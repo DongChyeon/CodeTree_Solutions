@@ -15,12 +15,12 @@ for y in range(y1[1] + offset, y2[1] + offset):
         field[y][x] = 2
 
 max_x = 0
-min_y = 2001
+max_y = 0
 
 for y in range(y1[0] + offset, y2[0] + offset):
     for x in range(x1[0] + offset, x2[0] + offset):
         if field[y][x] == 1:
             max_x = max(max_x, x)
-            min_y = min(min_y, y)
+            max_y = max(max_y, y)
 
-print((max_x - offset - (x1[0] - 1)) * (y2[0] - (min_y - offset)))
+print((max_x - offset - 1) * (max_y - offset))
