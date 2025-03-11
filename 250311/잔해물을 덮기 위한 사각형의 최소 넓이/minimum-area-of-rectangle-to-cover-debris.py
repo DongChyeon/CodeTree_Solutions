@@ -23,4 +23,4 @@ for y in range(y1[0] + offset, y2[0] + offset):
             max_x = max(max_x, x)
             max_y = max(max_y, y)
 
-print((max_x - offset - 1) * (max_y - offset))
+print((max_x - offset + 1 - x1[0]) * (max_y - offset + 1 - y1[0]))
