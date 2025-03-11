@@ -7,7 +7,7 @@ for num, direction in commands:
     dir.append(direction)
 
 # 1: 흰색 / 2: 검은색 / 3: 회색
-tiles = [[] for _ in range(10001)]
+tiles = [[] for _ in range(200001)]
 cur_idx = 5000
 
 for i in range(n):
