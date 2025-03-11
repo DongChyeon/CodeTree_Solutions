@@ -21,7 +21,7 @@ min_y = 2001
 
 for y in range(y2[0] + offset, y1[0] + offset - 1, -1):
     for x in range(x1[0] + offset, x2[0] + offset + 1):
-        if field[y][x] == 2:
+        if field[y][x] == 1:
             max_x = max(max_x, x)
             min_y = min(min_y, y)
 
