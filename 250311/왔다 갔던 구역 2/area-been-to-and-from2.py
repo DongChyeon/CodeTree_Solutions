@@ -7,20 +7,20 @@ for _ in range(n):
     dir.append(di)
 
 field = [0] * 2001
-current_index = 1000
+current_index = 1001
 
 for i in range(n):
     direction = dir[i]
     dx = x[i]
 
-    for _ in range(dx):
+    for j in range(dx):
         if direction == 'L':
             current_index -= 1
             field[current_index] += 1
         else:
-            current_index += 1
             field[current_index] += 1
-
+            current_index += 1
+            
 answer = 0
 for area in field:
     if (area > 1):
