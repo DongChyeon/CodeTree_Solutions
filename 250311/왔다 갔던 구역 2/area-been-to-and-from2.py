@@ -15,11 +15,12 @@ for i in range(n):
 
     for j in range(dx):
         if direction == 'L':
+            field[current_index] += 1
             current_index -= 1
-            field[current_index] += 1
         else:
-            field[current_index] += 1
             current_index += 1
+            field[current_index] += 1
+            
             
 answer = 0
 for area in field:
