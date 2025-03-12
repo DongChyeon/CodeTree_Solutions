@@ -14,6 +14,6 @@ for i in range(1, n):
         count += 1
         answer = max(answer, count)
     else:
-        count = 1
+        count = 0
 
 print(answer)
