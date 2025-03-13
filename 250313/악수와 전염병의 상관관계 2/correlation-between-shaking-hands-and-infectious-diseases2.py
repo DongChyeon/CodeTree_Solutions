@@ -10,7 +10,7 @@ for t, x, y in handshakes:
     if answer[x - 1] == 1 and infection_counts[x - 1] != 0:
         answer[y - 1] = 1
         infection_counts[x - 1] -= 1
-    if answer[y - 1] == 1 and infection_counts[y - 1] != 0:
+    elif answer[y - 1] == 1 and infection_counts[y - 1] != 0:
         answer[x - 1] = 1
         infection_counts[y - 1] -= 1
 
