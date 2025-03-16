@@ -1,8 +1,8 @@
 x, y = 0, 0
 
 dir_num = 3
-dx = [0, 1, -1, 0]
-dy = [1, 0, 0, -1]
+dx = [1, 0, -1, 0]
+dy = [0, -1, 0, 1]
 
 for direction in input():
     if direction == 'L':
