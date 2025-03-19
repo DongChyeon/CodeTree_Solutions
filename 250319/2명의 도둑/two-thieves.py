@@ -24,11 +24,14 @@ def in_range(x, y):
 
 def calc(thiefs_x, thiefs_y):
     value = 0
+
+    visited = [[False] * n for _ in range(n)]
     
     for i in range(2):
         weight = 0
         for j in range(m):
-            if in_range(thiefs_x[i] + j, thiefs_y[i]) and weight + things[thiefs_y[i]][thiefs_x[i] + j] <= c:
+            if in_range(thiefs_x[i] + j, thiefs_y[i]) and weight + things[thiefs_y[i]][thiefs_x[i] + j] <= c and not visited[thiefs_y[i]][thiefs_x[i] + j]:
+                visited[thiefs_y[i]][thiefs_x[i] + j] = True
                 weight += things[thiefs_y[i]][thiefs_x[i] + j]
                 value += things[thiefs_y[i]][thiefs_x[i] + j] ** 2
             else:
@@ -44,11 +47,6 @@ for comb in combinations:
         thiefs_x = [thief1_x, thief2_x]
         thiefs_y = [thief1_y, thief2_y]
 
-        if thief1_y == thief2_y:
-            if abs(thief1_x - thief2_x) < m:
-                continue
-            answer = max(answer, calc(thiefs_x, thiefs_y))
-        else:
-            answer = max(answer, calc(thiefs_x, thiefs_y))
+        answer = max(answer, calc(thiefs_x, thiefs_y))
 
 print(answer)
