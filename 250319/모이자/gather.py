@@ -1,7 +1,7 @@
 n = int(input())
 A = list(map(int, input().split()))
 
-answer = 10000
+answer = 250000
 
 for i in range(n):
     dist = 0
