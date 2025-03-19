@@ -4,11 +4,14 @@ x = [p[0] for p in points]
 y = [p[1] for p in points]
 
 answer = int(10e9)
-for i in range(1, n - 1):
+for skip_check in range(1, n - 1):
+    user_x, user_y = 0, 0
     current = 0
-    current += (abs(x[0] - x[i]) + abs(y[0] - y[i]))
-    current += (abs(x[n - 1] - x[i]) + abs(y[n - 1] - y[i]))
-
+    for i in range(1, n):
+        if i == skip_check:
+            continue
+        current += (abs(user_x - x[i]) + abs(user_y - y[i]))
+        user_x, user_y = x[i], y[i]
     answer = min(answer, current)
 
 print(answer)
