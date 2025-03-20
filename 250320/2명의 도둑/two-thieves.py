@@ -39,16 +39,9 @@ def get_combinations(n, start_area, count):
 def in_range(x, y):
     return 0 <= x < n and 0 <= y < n
 
-def calc(thiefs_y):
+def calc(thiefs_x_combinations, thiefs_y):
     max_val = 0
 
-    thiefs_x_combinations = []
-    for i in range(1, m + 1):
-        for j in range(n - m + 1):
-            for comb in get_combinations(j + m, j, i):
-                if comb[1][-1] - comb[1][0] < m:
-                    thiefs_x_combinations.append(comb)
-                    
     for comb_1 in thiefs_x_combinations:
         for comb_2 in thiefs_x_combinations:
             visited = [[False] * n for _ in range(n)]
@@ -79,7 +72,14 @@ def calc(thiefs_y):
     return max_val
 
 combinations = get_combinations_with_repetition(n, 2)
-for comb in combinations:
-    answer = max(answer, calc(comb))
+thiefs_x_combinations = []
+for i in range(1, m + 1):
+    for j in range(n - m + 1):
+        for comb in get_combinations(j + m, j, i):
+            if comb[1][-1] - comb[1][0] < m:
+                thiefs_x_combinations.append(comb)
+                     
+for thiefs_y in combinations:
+    answer = max(answer, calc(thiefs_x_combinations, thiefs_y))
 
 print(answer)
