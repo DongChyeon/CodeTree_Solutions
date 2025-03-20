@@ -44,7 +44,7 @@ def calc(thiefs_y):
     thiefs_x_combinations = []
     for i in range(1, m + 1):
         for comb in get_combinations(n, i):
-            if max(comb) - min(comb) < m:
+            if comb[-1] - comb[0] < m:
                 thiefs_x_combinations.append(comb)
 
     for comb_1 in thiefs_x_combinations:
