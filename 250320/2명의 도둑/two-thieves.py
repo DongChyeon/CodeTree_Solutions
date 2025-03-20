@@ -19,19 +19,20 @@ def get_combinations_with_repetition(n, count):
 
     return thing_combinations
 
-def get_combinations(n, count):
+def get_combinations(n, start_area, count):
     thing_combinations = []
     thing_comb = []
 
+    start = start_area
     def choose_thing(depth, start, n):
         if depth == count:
-            thing_combinations.append(thing_comb[:])
+            thing_combinations.append((start_area, thing_comb[:]))
             return
         for i in range(start, n):
             thing_comb.append(i)
             choose_thing(depth + 1, i + 1, n)
             thing_comb.pop()
-    choose_thing(0, 0, n)
+    choose_thing(0, start, n)
 
     return thing_combinations
 
@@ -43,9 +44,11 @@ def calc(thiefs_y):
 
     thiefs_x_combinations = []
     for i in range(1, m + 1):
-        for comb in get_combinations(n, i):
-            if comb[-1] - comb[0] < m:
-                thiefs_x_combinations.append(comb)
+        for j in range(n - m):
+            for comb in get_combinations(n, j, i):
+                if comb[1][-1] - comb[1][0] < m:
+                    thiefs_x_combinations.append(comb)
+
 
     for comb_1 in thiefs_x_combinations:
         for comb_2 in thiefs_x_combinations:
@@ -55,13 +58,13 @@ def calc(thiefs_y):
                 continue
 
             weight = 0
-            for x_1 in comb_1:
+            for x_1 in comb_1[1]:
                 if in_range(x_1, thiefs_y[0]) and weight + things[thiefs_y[0]][x_1] <= c and not visited[thiefs_y[0]][x_1]:
                     visited[thiefs_y[0]][x_1] = True
                     weight += things[thiefs_y[0]][x_1]
 
             weight = 0
-            for x_2 in comb_2:
+            for x_2 in comb_2[1]:
                 if in_range(x_2, thiefs_y[1]) and weight + things[thiefs_y[1]][x_2] <= c and not visited[thiefs_y[1]][x_2]:
                     visited[thiefs_y[1]][x_2] = True
                     weight += things[thiefs_y[1]][x_2]
