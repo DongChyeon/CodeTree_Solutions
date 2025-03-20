@@ -47,7 +47,7 @@ def is_posssible(x1, y1, x2, y2):
     if intersect(x1, x1 + m - 1, x2, x2 + m - 1):
         return False
 
-    return False
+    return True
 
 for y1 in range(n):
     for x1 in range(n - m + 1):
