@@ -38,7 +38,7 @@ def find_max(x, y):
     return max_val
 
 def intersect(start1, end1, start2, end2):
-    return not (end1 < start2 or end2 < start1)
+    return not end1 < start2 or end2 < start1
 
 def is_posssible(x1, y1, x2, y2):
     if y1 != y2:
@@ -51,7 +51,7 @@ def is_posssible(x1, y1, x2, y2):
 
 for y1 in range(n):
     for x1 in range(n - m + 1):
-        for y2 in range(2):
+        for y2 in range(n):
             for x2 in range(n - m + 1):
                 if is_posssible(x1, y1, x2, y2):
                     answer = max(answer, find_max(x1, y1) + find_max(x2, y2))
