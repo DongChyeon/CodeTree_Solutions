@@ -51,6 +51,9 @@ def calc(thiefs_y):
         for comb_2 in thiefs_x_combinations:
             visited = [[False] * n for _ in range(n)]
 
+            if thiefs_y[0] == thiefs_y[1] and abs(comb_1[0] - comb_2[0]) < m:
+                continue
+
             weight = 0
             for x_1 in comb_1:
                 if in_range(x_1, thiefs_y[0]) and weight + things[thiefs_y[0]][x_1] <= c and not visited[thiefs_y[0]][x_1]:
