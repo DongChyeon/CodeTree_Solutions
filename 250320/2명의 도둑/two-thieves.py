@@ -44,20 +44,30 @@ def calc(thiefs_y):
     thiefs_x_combinations = []
     for i in range(1, m + 1):
         for comb in get_combinations(n, i):
-            thiefs_x_combinations.append(comb)
+            if max(comb) - min(comb) < m:
+                thiefs_x_combinations.append(comb)
 
     for comb_1 in thiefs_x_combinations:
         for comb_2 in thiefs_x_combinations:
             visited = [[False] * n for _ in range(n)]
-            value = 0
 
-            for i in range(2):
-                weight = 0
-                for x_1 in comb_1:
-                    if in_range(x_1, thiefs_y[i]) and weight + things[thiefs_y[i]][x_1] <= c and not visited[thiefs_y[i]][x_1]:
-                        visited[thiefs_y[i]][x_1] = True
-                        weight += things[thiefs_y[i]][x_1]
-                        value += things[thiefs_y[i]][x_1] ** 2
+            weight = 0
+            for x_1 in comb_1:
+                if in_range(x_1, thiefs_y[0]) and weight + things[thiefs_y[0]][x_1] <= c and not visited[thiefs_y[0]][x_1]:
+                    visited[thiefs_y[0]][x_1] = True
+                    weight += things[thiefs_y[0]][x_1]
+
+            weight = 0
+            for x_2 in comb_2:
+                if in_range(x_2, thiefs_y[1]) and weight + things[thiefs_y[1]][x_2] <= c and not visited[thiefs_y[1]][x_2]:
+                    visited[thiefs_y[1]][x_2] = True
+                    weight += things[thiefs_y[1]][x_2]
+
+            value = 0
+            for y in range(n):
+                for x in range(n):
+                    if visited[y][x]:
+                        value += things[y][x] ** 2
 
             max_val = max(max_val, value)
             
