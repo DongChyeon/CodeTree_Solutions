@@ -45,10 +45,10 @@ def calc(thiefs_y):
     thiefs_x_combinations = []
     for i in range(1, m + 1):
         for j in range(n - m + 1):
-            for comb in get_combinations(n, j, i):
+            for comb in get_combinations(j + m, j, i):
                 if comb[1][-1] - comb[1][0] < m:
                     thiefs_x_combinations.append(comb)
-
+                    
     for comb_1 in thiefs_x_combinations:
         for comb_2 in thiefs_x_combinations:
             visited = [[False] * n for _ in range(n)]
