@@ -1,15 +1,16 @@
 equation = input()
-operators = [
+operands = [
     equation[i]
     for i in range(len(equation))
-    if equation[i] == '+' or equation[i] == '-' or equation[i] == '*'
+    if equation[i].islower()
 ]
+
 answer = 0
 
 number_combinations = []
 numbers = []
 def choose_number(depth, n):
-    if depth == len(operators) + 1:
+    if depth == len(operands):
         number_combinations.append(numbers[:])
         return
 
@@ -19,17 +20,26 @@ def choose_number(depth, n):
         numbers.pop()
 choose_number(0, 4)
 
-for combination in number_combinations:
-    val = combination[0]
+def is_operator(ch):
+    return equation[i] == '+' or equation[i] == '-' or equation[i] == '*'
 
-    for i in range(1, len(combination)):
-        operator = operators[i - 1]
-        if operator == '+':
-            val += combination[i]
-        elif operator == '-':
-            val -= combination[i]
-        elif operator == '*':
-            val *= combination[i]
+for combination in number_combinations:
+    operand_dict = dict(zip(operands, combination))
+
+    val = operand_dict[equation[0]]
+
+    for i in range(1, len(equation)):
+        if is_operator(equation[i]):
+            operator = equation[i]
+            if operator == '+':
+                val += operand_dict[equation[i + 1]]
+                i += 1
+            elif operator == '-':
+                val -= operand_dict[equation[i + 1]]
+                i += 1
+            elif operator == '*':
+                val *= operand_dict[equation[i + 1]]
+                i += 1
     
     answer = max(answer, val)
 
