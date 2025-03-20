@@ -1,11 +1,11 @@
 import sys
 
 equation = input()
-operands = [
+operands = set([
     equation[i]
     for i in range(len(equation))
     if equation[i].islower()
-]
+])
 
 answer = -sys.maxsize - 1
 
@@ -16,9 +16,9 @@ def choose_number(depth, numbers, n):
     global answer
 
     if depth == len(operands):
-        operand_dict = dict(zip(set(operands), numbers[:]))
-
+        operand_dict = dict(zip(operands, numbers[:]))
         val = operand_dict[equation[0]]
+
         for i in range(1, len(equation)):
             if is_operator(equation[i]):
                 operator = equation[i]
