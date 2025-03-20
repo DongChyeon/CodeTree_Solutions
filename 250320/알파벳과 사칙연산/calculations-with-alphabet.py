@@ -1,3 +1,5 @@
+import sys
+
 equation = input()
 operands = [
     equation[i]
@@ -5,7 +7,7 @@ operands = [
     if equation[i].islower()
 ]
 
-answer = 0
+answer = -sys.maxsize - 1
 
 number_combinations = []
 numbers = []
