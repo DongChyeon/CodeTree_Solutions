@@ -26,7 +26,7 @@ def is_operator(ch):
     return equation[i] == '+' or equation[i] == '-' or equation[i] == '*'
 
 for combination in number_combinations:
-    operand_dict = dict(zip(operands, combination))
+    operand_dict = dict(zip(set(operands), combination))
 
     val = operand_dict[equation[0]]
 
