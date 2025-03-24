@@ -41,10 +41,9 @@ def dig(x, y, k):
         if reward // m > answer:    
             answer = reward // m
 
-
 for y in range(n):
     for x in range(n):
-        for depth in range(n):
+        for depth in range(n + 1):
             dig(x, y, depth)
 
 print(answer)
