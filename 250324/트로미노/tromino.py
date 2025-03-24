@@ -7,7 +7,7 @@ def in_range(x, y):
     return 0 <= y < n and 0 <= x < m
 
 dxs = [
-    [0, -1, 0],
+    [0, 0, 1],
     [0, 0, 1],
     [0, -1, 0],
     [0, 0, -1],
@@ -15,7 +15,7 @@ dxs = [
     [0, 0, 0]
 ]
 dys = [
-    [0, 0, 1],
+    [0, -1, 0],
     [0, 1, 0],
     [0, 0, 1],
     [0, -1, 0],
@@ -26,7 +26,7 @@ dys = [
 for y in range(n):
     for x in range(m):
         for i in range(6):
-            
+
             count = 0
             can_locate = True
             for j in range(3):
