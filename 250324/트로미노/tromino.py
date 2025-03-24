@@ -26,14 +26,19 @@ dys = [
 for y in range(n):
     for x in range(m):
         for i in range(6):
+            
             count = 0
+            can_locate = True
             for j in range(3):
                 nx, ny = x + dxs[i][j], y + dys[i][j]
 
                 if in_range(nx, ny):
                     count += grid[ny][nx]
                 else:
+                    can_locate = False
                     break
-            answer = max(answer, count)
+
+            if can_locate:
+                answer = max(answer, count)
 
 print(answer)
