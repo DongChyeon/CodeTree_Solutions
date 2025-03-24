@@ -37,7 +37,7 @@ def dig(x, y, k):
             if visited[y][x] == 1 and grid[y][x] == 1:
                 reward += m
     
-    if reward >= k ** k + (k + 1) ** 2:
+    if reward >= k ** 2 + (k + 1) ** 2:
         if reward // m > answer:    
             answer = reward // m
 
