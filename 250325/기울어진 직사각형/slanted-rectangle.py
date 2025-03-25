@@ -47,13 +47,6 @@ def traverse(x, y, k):
 
             if sum_of_value > answer:
                 answer = sum_of_value
-                ''' print(x, y, sum_of_value, length1, length2)
-
-                for row in visited:
-                    for col in row:
-                        print(col, end=' ')
-                    print()
-                print()'''
                 
 for y in range(n):
     for x in range(n):
