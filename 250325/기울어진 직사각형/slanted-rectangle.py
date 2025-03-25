@@ -12,34 +12,30 @@ def in_range(x, y):
 def traverse(x, y, k):
     global answer
 
-    for length1 in range(1, k):
+    for length1 in range(k):
         visited = [[0] * n for _ in range(n)]
+        visited[y][x] = 1
 
-        length2 = k - length1
+        length2 = k - length1        
 
         can_establish = True
         for d in range(4):
             if d % 2 == 0:
-                for i in range(length1):
+                for _ in range(length1 - 1):
                     nx, ny = x + dx[d], y + dy[d]
                     if in_range(nx, ny):
                         x, y = nx, ny
                         visited[ny][nx] = 1
                     else:
                         can_establish = False
-                        break
             else:
-                for i in range(length2):
+                for _ in range(length2 - 1):
                     nx, ny = x + dx[d], y + dy[d]
                     if in_range(nx, ny):
                         x, y = nx, ny
                         visited[ny][nx] = 1
                     else:
                         can_establish = False
-                        break
-
-            if not can_establish:
-                break
 
         if can_establish:
             sum_of_value = sum([
@@ -49,11 +45,13 @@ def traverse(x, y, k):
                 if visited[y][x] == 1
             ])
 
-            answer = max(answer, sum_of_value)
+            if sum_of_value > answer:
+                answer = sum_of_value
+    
 
 for y in range(n):
     for x in range(n):
-        for k in range(2, n + 1):
+        for k in range(2, n + 2):
             traverse(x, y, k)
 
 print(answer)
