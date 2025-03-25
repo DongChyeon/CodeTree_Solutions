@@ -6,44 +6,22 @@ def in_range(x, y):
     return 0 <= x < n and 0 <= y < n
 
 def dig(x, y, k):
-    visited = [[0] * n for _ in range(n)]
-
     global answer
 
-    reward = 0
+    cost = k ** 2 + (k + 1) ** 2
+    num_of_gold = sum([
+        grid[i][j]
+        for i in range(n)
+        for j in range(n)
+        if abs(x - i) + abs(y - j) <= k
+    ])
 
-    for i in range(k + 1):
-        if in_range(x, y - i):
-            visited[y - i][x] = 1
-
-        for j in range(1, k - i + 1):
-            if in_range(x + j, y - i):
-                visited[y - i][x + j] = 1
-            if in_range(x - j, y - i):
-                visited[y - i][x - j] = 1
-
-    for i in range(1, k + 1):
-        if in_range(x, y + i):
-            visited[y + i][x] = 1
-
-        for j in range(1, k - i + 1):
-            if in_range(x + j, y + i):
-                visited[y + i][x + j] = 1
-            if in_range(x - j, y + i):
-                visited[y + i][x - j] = 1            
-
-    for y in range(n):
-        for x in range(n):
-            if visited[y][x] == 1 and grid[y][x] == 1:
-                reward += m
-    
-    if reward >= k ** 2 + (k + 1) ** 2:
-        if reward // m > answer:    
-            answer = reward // m
+    if num_of_gold * m >= cost:
+        answer = max(answer, num_of_gold)
 
 for y in range(n):
     for x in range(n):
-        for depth in range(n + 1):
-            dig(x, y, depth)
+        for k in range(2 * (n - 1) + 1):
+            dig(x, y, k)
 
 print(answer)
