@@ -8,7 +8,7 @@ def calculate(x, y, w, h):
 
     for y_pos in range(y, y + h):
         for x_pos in range(x, x + w):
-            if grid[y_pos][x_pos] < 0:
+            if grid[y_pos][x_pos] <= 0:
                 return -1
             else:
                 area += 1
