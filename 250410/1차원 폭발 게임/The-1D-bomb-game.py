@@ -1,39 +1,27 @@
 n, m = map(int, input().split())
 numbers = [int(input()) for _ in range(n)]
 
-def simulate():
-    global numbers
+def get_end_index_of_explosion(start_index, current_number):
+    for end_index in range(start_index + 1, len(numbers)):
+        if numbers[end_index] != current_number:
+            return end_index - 1
 
-    if len(numbers) == 0:
-        return False
-
-    count = 1
-    last_number = numbers[0]
-
-    is_continue = False
-    for i in range(1, len(numbers)):
-        if last_number == numbers[i]:
-            count += 1
-        else:
-            if count >= m:
-                is_continue = True
-                for j in range(i - count, i):
-                    numbers[j] = 0
-
-            count = 1
-            last_number = numbers[i]
-    if count >= m:
-        is_continue = True
-        for j in range(len(numbers) - count, len(numbers)):
-            numbers[j] = 0
-
-    numbers = [num for num in numbers if num != 0]
-
-    return is_continue
+    return len(numbers) - 1
 
 while True:
-    is_continue = simulate()
-    if not is_continue:
+    did_explode = False
+    current_index = 0
+
+    while current_index < len(numbers):
+        end_index = get_end_index_of_explosion(current_index, numbers[current_index])
+
+        if end_index - current_index + 1 >= m:
+            del numbers[current_index:end_index + 1]
+            did_explode = True
+        else:
+            current_index = end_index + 1
+
+    if not did_explode:
         break
 
 print(len(numbers))
