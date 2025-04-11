@@ -76,8 +76,9 @@ else:
         else:
             while len(temp) < 4:
                 temp.append(0)
+            temp = temp[::-1]
             for i in range(4):
-                grid[i][col] = temp[i][::-1]
+                grid[i][col] = temp[i]
 
 for row in grid:
     for col in row:
