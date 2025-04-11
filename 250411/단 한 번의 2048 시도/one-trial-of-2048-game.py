@@ -7,29 +7,30 @@ direction = input()
 # Please write your code here.
 if direction == 'L' or direction == 'R':
     for row in range(4):
+        numbers = [num for num in grid[row] if num != 0]
         temp = []
 
         if direction == 'L':
             i = 0
-            while i < 4:
-                if grid[row][i] == 0:
+            while i < len(numbers):
+                if numbers[i] == 0:
                     i += 1
-                elif i < 3 and grid[row][i] == grid[row][i + 1]:
-                    temp.append(grid[row][i] * 2)
+                elif i < len(numbers) -1 and numbers[i] == numbers[i + 1]:
+                    temp.append(numbers[i] * 2)
                     i += 2
                 else:
-                    temp.append(grid[row][i])
+                    temp.append(numbers[i])
                     i += 1
         else:
-            i = 3
+            i = len(numbers) - 1
             while i > -1:
                 if grid[row][i] == 0:
                     i -= 1
-                elif i > 0 and grid[row][i] == grid[row][i - 1]:
-                    temp.append(grid[row][i] * 2)
+                elif i > 0 and numbers[i] == numbers[i - 1]:
+                    temp.append(numbers[i] * 2)
                     i -= 2
                 else:
-                    temp.append(grid[row][i])
+                    temp.append(numbers[i])
                     i -= 1
     
         if direction == 'L':
@@ -43,29 +44,30 @@ if direction == 'L' or direction == 'R':
 
 else:
     for col in range(4):
+        numbers = [grid[row][col] for row in range(4) if grid[row][col] != 0]
         temp = []
 
         if direction == 'U':
             i = 0
-            while i < 4:
-                if grid[i][col] == 0:
+            while i < len(numbers):
+                if numbers[i] == 0:
                     i += 1
-                elif i < 3 and grid[i][col] == grid[i + 1][col]:
-                    temp.append(grid[i][col] * 2)
+                elif i < len(numbers) -1 and numbers[i] == numbers[i + 1]:
+                    temp.append(numbers[i] * 2)
                     i += 2
                 else:
-                    temp.append(grid[i][col])
+                    temp.append(numbers[i])
                     i += 1
         else:
-            i = 3
+            i = len(numbers) - 1
             while i > -1:
-                if grid[i][col] == 0:
+                if numbers[i] == 0:
                     i -= 1
-                elif i > 0 and grid[i][col] == grid[i - 1][col]:
-                    temp.append(grid[i][col] * 2)
+                elif i > 0 and numbers[i] == numbers[i - 1]:
+                    temp.append(numbers[i] * 2)
                     i -= 2
                 else:
-                    temp.append(grid[i][col])
+                    temp.append(numbers[i])
                     i -= 1
     
         if direction == 'U':
