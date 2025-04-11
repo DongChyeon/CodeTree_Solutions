@@ -24,7 +24,7 @@ if direction == 'L' or direction == 'R':
         else:
             i = len(numbers) - 1
             while i > -1:
-                if grid[row][i] == 0:
+                if numbers[i] == 0:
                     i -= 1
                 elif i > 0 and numbers[i] == numbers[i - 1]:
                     temp.append(numbers[i] * 2)
