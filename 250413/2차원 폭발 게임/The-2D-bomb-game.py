@@ -44,32 +44,32 @@ def get_last_index_of_value(start_index, col):
     return last_index
 
 def explode(m):
-    has_explode = False
-
-    for col in range(n):
-        for i in range(n):
-            if grid[i][col] == 0:
-                continue
-
-            last_index = get_last_index_of_value(i, col)
+    while True:
+        has_explode = False
         
-            if last_index - i >= m - 1:
-                for row in range(i, last_index + 1):
-                    grid[row][col] = 0
-                i = last_index + 1
+        for col in range(n):
+            for i in range(n):
+                if grid[i][col] == 0:
+                    continue
 
-                has_explode = True
-    drop()
+                last_index = get_last_index_of_value(i, col)
+            
+                if last_index - i >= m - 1:
+                    for row in range(i, last_index + 1):
+                        grid[row][col] = 0
+                    i = last_index + 1
 
-    return has_explode
+                    has_explode = True
+        drop()
+
+        if not has_explode:
+            break
 
 for _ in range(k):
     explode(m)
     rotate()
-while True:
-    if not explode(m):
-        break
-        
+explode(m)
+
 answer = 0
 for row in grid:
     for col in row:
