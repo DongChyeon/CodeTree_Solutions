@@ -44,6 +44,8 @@ def get_last_index_of_value(start_index, col):
     return last_index
 
 def explode(m):
+    has_explode = False
+
     for col in range(n):
         for i in range(n):
             if grid[i][col] == 0:
@@ -54,16 +56,20 @@ def explode(m):
             if last_index - i >= m - 1:
                 for row in range(i, last_index + 1):
                     grid[row][col] = 0
-
                 i = last_index + 1
+
                 has_explode = True
     drop()
+
+    return has_explode
 
 for _ in range(k):
     explode(m)
     rotate()
-explode(m)
-
+while True:
+    if not explode(m):
+        break
+        
 answer = 0
 for row in grid:
     for col in row:
