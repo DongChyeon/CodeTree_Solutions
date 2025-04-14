@@ -42,8 +42,6 @@ def drop():
 def check():
     global answer
 
-    pairs = []
-
     dx = [0, 0, -1, 1]
     dy = [-1, 1, 0, 0]
     count = 0
@@ -56,10 +54,10 @@ def check():
                 if not in_range(nx, ny) or new_grid[y][x] == 0 or new_grid[ny][nx] == 0:
                     continue
 
-                if new_grid[y][x] == new_grid[ny][nx] and (nx, ny, x, y) not in pairs and (x, y, nx, ny) not in pairs:
-                    pairs.append((x, y, nx, ny))
+                if new_grid[y][x] == new_grid[ny][nx]:
+                    count += 1
 
-    answer = max(answer, len(pairs))
+    answer = max(answer, count // 2)
 
 for y in range(n):
     for x in range(n):
