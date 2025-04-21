@@ -15,6 +15,14 @@ answer = 0
 def in_range(x, y):
     return 0 <= x < n and 0 <= y < n
 
+def is_arounded_by_walls(x, y):
+    for i in range(4):
+        nx, ny = x + dx[i], y + dy[i]
+        if not in_range(nx, ny) or grid[ny][nx] == '.':
+            return False
+
+    return True
+
 def is_wall_on_right(x, y):
     temp_dir_idx = (dir_idx + 1) % 4
     nx, ny = x + dx[temp_dir_idx], y + dy[temp_dir_idx]
@@ -42,6 +50,9 @@ while True:
 
         # 이동 위치에 벽이 있다면 반시계 방향 회전
         if grid[ny][nx] == '#':
+            if is_arounded_by_walls(x, y):
+                answer = -1
+                break
             rotate_left()
         # 이동 후 오른쪽에 벽이 없다면 시계 방향 회전 후 한칸 이동
         else:
