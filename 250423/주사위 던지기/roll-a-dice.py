@@ -43,16 +43,11 @@ for direction in directions:
             dice_vertical.rotate(1)
             dice_horizontal[1] = dice_vertical[1]
 
-        #print(dice_horizontal)
-        #print(dice_vertical)
-
         grid[y][x] = dice_horizontal[1]
             
 answer = 0
 for y in range(n):
     for x in range(n):
-        #print(grid[y][x], end=' ')
         answer += grid[y][x]
-    #print()
 
 print(answer)
