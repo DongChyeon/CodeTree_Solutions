@@ -21,7 +21,7 @@ for sec in range(1, m + 1):
         x, y = pos
         if grid[y][x] == 1:
             for i in range(4):
-                nx, ny = x + (sec * dx[i]), y + (sec * dy[i])
+                nx, ny = x + (2 ** (sec - 1) * dx[i]), y + (2 ** (sec - 1) * dy[i])
                 if in_range(nx, ny) and grid[ny][nx] != 1:
                     grid[ny][nx] = 1
 
