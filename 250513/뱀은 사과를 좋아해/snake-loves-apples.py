@@ -15,20 +15,13 @@ def solution():
         r, c = map(int, input().split())
         grid[r - 1][c - 1] = 2
 
-    def print_grid():
-        for row in grid:
-            for col in row:
-                print(col, end=' ')
-            print()
-        print()
-
     def in_range(x, y):
         return 0 <= x < n and 0 <= y < n
 
     dx = [0, 0, -1, 1]
     dy = [-1, 1, 0, 0]
 
-    direction_mapper = {
+    mapper = {
         'U': 0,
         'D': 1,
         'L': 2,
@@ -40,9 +33,8 @@ def solution():
         distance = int(distance)
         
         for _ in range(distance):
-            #print_grid()
             answer += 1
-            nx, ny = x + dx[direction_mapper[direction]], y + dy[direction_mapper[direction]]
+            nx, ny = x + dx[mapper[direction]], y + dy[mapper[direction]]
 
             if not in_range(nx, ny):
                 return answer
