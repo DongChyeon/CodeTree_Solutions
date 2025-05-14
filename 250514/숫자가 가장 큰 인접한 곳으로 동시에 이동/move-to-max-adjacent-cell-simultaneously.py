@@ -20,8 +20,6 @@ for _ in range(m):
     r, c = map(int, input().split())
     count[c - 1][r - 1] = 1
 
-print_count()
-
 for _ in range(t):
     new_count = [[0 for _ in range(n)] for _ in range(n)]
 
