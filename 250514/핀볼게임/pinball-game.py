@@ -1,9 +1,6 @@
 n = int(input())
 grid = [list(map(int, input().split())) for _ in range(n)]
 
-dx = [0, 1, 0, -1]
-dy = [-1, 0, 1, 0]
-
 def in_range(x, y):
     return 0 <= x < n and 0 <= y < n
 
@@ -14,6 +11,9 @@ def turn_right(dir_idx):
     return (dir_idx + 1) % 4 
 
 def simulate(x, y, dir_idx):
+    dx = [0, 1, 0, -1]
+    dy = [-1, 0, 1, 0]
+
     sec = 1
     while in_range(x, y):
         if grid[y][x] == 1:
@@ -39,15 +39,9 @@ for dir_idx in range(2, 6):
     dir_idx = dir_idx % 4
 
     for i in range(n):
-        if dir_idx == 0:
-            x, y = i, n - 1
-        elif dir_idx == 1:
-            x, y = 0, i
-        elif dir_idx == 2:
-            x, y = i, 0
-        else:
-            x, y = n - 1, i
-
-        answer = max(simulate(x, y, dir_idx), answer)
+        answer = max(answer, simulate(i, n - 1, 0))
+        answer = max(answer, simulate(0, i, 1))
+        answer = max(answer, simulate(i, 0, 2))
+        answer = max(answer, simulate(n - 1, i, 3))
 
 print(answer)
