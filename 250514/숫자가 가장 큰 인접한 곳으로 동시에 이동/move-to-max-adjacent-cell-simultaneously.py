@@ -9,16 +9,9 @@ def in_range(x, y):
 
 count = [[0 for _ in range(n)] for _ in range(n)]
 
-def print_count():
-    for row in count:
-        for col in row:
-            print(col, end=' ')
-        print()
-    print()
-
 for _ in range(m):
     r, c = map(int, input().split())
-    count[c - 1][r - 1] = 1
+    count[r - 1][c - 1] = 1
 
 for _ in range(t):
     new_count = [[0 for _ in range(n)] for _ in range(n)]
@@ -26,18 +19,16 @@ for _ in range(t):
     for y in range(n):
         for x in range(n):
             if count[y][x] == 1:
-                can_move = False
-
+                next_dir = 0
+                max_val = 0
                 for i in range(4):
                     nx, ny = x + dx[i], y + dy[i]
+                    
+                    if in_range(nx, ny) and grid[ny][nx] > max_val:
+                        next_dir = i
+                        max_val = grid[ny][nx]
 
-                    if in_range(nx, ny) and grid[ny][nx] > grid[y][x]:
-                        new_count[ny][nx] += 1
-                        can_move = True
-                        break
-
-                if not can_move:
-                    new_count[y][x] += 1
+                new_count[y + dy[next_dir]][x + dx[next_dir]] += 1
 
     for y in range(n):
         for x in range(n):
@@ -47,8 +38,6 @@ for _ in range(t):
     for y in range(n):
         for x in range(n):
             count[y][x] = new_count[y][x]
-
-    #print_count()
 
 answer = 0
 for y in range(n):
