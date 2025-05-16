@@ -32,7 +32,7 @@ for _ in range(t):
         x, y = int(xi) - 1, int(yi) - 1
         grid[x][y] = 1 + mapper[di]
 
-    for _ in range(n * 2):
+    for _ in range(n * 3):
         new_grid = [[0 for _ in range(n)] for _ in range(n)]
 
         for y in range(n):
@@ -48,7 +48,7 @@ for _ in range(t):
                             new_grid[y][x] = change_direction(dir_idx) + 1
                     else:
                         if new_grid[ny][nx] > 0:
-                            
+                            # 2개 이상 충돌할 시 -1로 마킹
                             new_grid[ny][nx] = -1
                         else:
                             new_grid[ny][nx] = grid[y][x]
