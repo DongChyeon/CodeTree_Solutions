@@ -20,6 +20,13 @@ for _ in range(t):
     def change_direction(dir_idx):
         return (dir_idx + 2) % 4
 
+    def print_grid():
+        for row in grid:
+            for col in row:
+                print(col, end=' ')
+            print()
+        print()
+
     for _ in range(m):
         xi, yi, di = input().split()
         x, y = int(xi) - 1, int(yi) - 1
@@ -34,10 +41,14 @@ for _ in range(t):
                     dir_idx = grid[y][x] - 1
                     nx, ny = x + dx[dir_idx], y + dy[dir_idx]
                     if not in_range(nx, ny):
-                        new_grid[y][x] = change_direction(dir_idx) + 1
+                        if new_grid[y][x] > 0:
+                            # 2개 이상 충돌할 시 -1로 마킹
+                            new_grid[y][x] = -1
+                        else:
+                            new_grid[y][x] = change_direction(dir_idx) + 1
                     else:
                         if new_grid[ny][nx] > 0:
-                            # 2개 이상 충돌할 시 -1로 마킹
+                            
                             new_grid[ny][nx] = -1
                         else:
                             new_grid[ny][nx] = grid[y][x]
@@ -48,6 +59,8 @@ for _ in range(t):
                 if new_grid[y][x] == -1:
                     new_grid[y][x] = 0
                 grid[y][x] = new_grid[y][x]
+
+        #print_grid()
 
     answer = 0
     for row in grid:
