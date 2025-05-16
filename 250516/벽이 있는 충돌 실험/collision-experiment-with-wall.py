@@ -23,7 +23,7 @@ for _ in range(t):
     for _ in range(m):
         xi, yi, di = input().split()
         x, y = int(xi) - 1, int(yi) - 1
-        grid[y][x] = 1 + mapper[di]
+        grid[x][y] = 1 + mapper[di]
 
     for _ in range(n * 2):
         new_grid = [[0 for _ in range(n)] for _ in range(n)]
