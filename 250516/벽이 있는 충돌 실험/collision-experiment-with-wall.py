@@ -20,21 +20,7 @@ for _ in range(t):
 
     def change_direction(dir_idx):
         return (dir_idx + 2) % 4
-
-    def print_grid():
-        for row in grid:
-            for col in row:
-                print(col, end=' ')
-            print()
-        print()
-
-    def print_directions():
-        for row in directions:
-            for col in row:    
-                print(col, end=' ')
-            print()
-        print()
-
+        
     for _ in range(m):
         xi, yi, di = input().split()
         x, y = int(xi) - 1, int(yi) - 1
@@ -65,9 +51,6 @@ for _ in range(t):
                     new_directions[y][x] = -1
                 grid[y][x] = new_grid[y][x]
                 directions[y][x] = new_directions[y][x]
-
-        #print_grid()
-        #print_directions()
 
     answer = 0
     for row in grid:
