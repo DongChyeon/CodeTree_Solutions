@@ -13,6 +13,7 @@ mapper = {
 for _ in range(t):
     n, m = map(int, input().split())
     grid = [[0 for _ in range(n)] for _ in range(n)]
+    directions = [[-1 for _ in range(n)] for _ in range(n)]
 
     def in_range(x, y):
         return 0 <= x < n and 0 <= y < n
@@ -27,40 +28,46 @@ for _ in range(t):
             print()
         print()
 
+    def print_directions():
+        for row in directions:
+            for col in row:    
+                print(col, end=' ')
+            print()
+        print()
+
     for _ in range(m):
         xi, yi, di = input().split()
         x, y = int(xi) - 1, int(yi) - 1
-        grid[x][y] = 1 + mapper[di]
+        grid[x][y] = 1
+        directions[x][y] = mapper[di]
 
-    for _ in range(n * 3):
+    for _ in range(n * 2):
         new_grid = [[0 for _ in range(n)] for _ in range(n)]
+        new_directions = [[-1 for _ in range(n)] for _ in range(n)]
 
         for y in range(n):
             for x in range(n):
                 if grid[y][x] > 0:
-                    dir_idx = grid[y][x] - 1
+                    dir_idx = directions[y][x]
                     nx, ny = x + dx[dir_idx], y + dy[dir_idx]
-                    if not in_range(nx, ny):
-                        if new_grid[y][x] > 0:
-                            # 2개 이상 충돌할 시 -1로 마킹
-                            new_grid[y][x] = -1
-                        else:
-                            new_grid[y][x] = change_direction(dir_idx) + 1
-                    else:
-                        if new_grid[ny][nx] > 0:
-                            # 2개 이상 충돌할 시 -1로 마킹
-                            new_grid[ny][nx] = -1
-                        else:
-                            new_grid[ny][nx] = grid[y][x]
 
+                    if not in_range(nx, ny):
+                        new_grid[y][x] += 1
+                        new_directions[y][x] = change_direction(dir_idx)
+                    else:
+                        new_grid[ny][nx] += 1
+                        new_directions[ny][nx] = directions[y][x]
 
         for y in range(n):
             for x in range(n):
-                if new_grid[y][x] == -1:
+                if new_grid[y][x] > 1:
                     new_grid[y][x] = 0
+                    new_directions[y][x] = -1
                 grid[y][x] = new_grid[y][x]
+                directions[y][x] = new_directions[y][x]
 
         #print_grid()
+        #print_directions()
 
     answer = 0
     for row in grid:
