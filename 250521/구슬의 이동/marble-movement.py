@@ -6,8 +6,8 @@ velocity = [0]
 
 direction_mapper = {
     'U': 0,
-    'D': 1,
-    'L': 2,
+    'L': 1,
+    'D': 2,
     'R': 3
 }
 
@@ -28,27 +28,27 @@ for num in range(1, m + 1):
     direction.append(direction_mapper[d])
     velocity.append(int(v))
 
+#print_grid()
+
 def in_range(x, y):
     return 0 <= x < n and 0 <= y < n
 
 def change_direction(d):
-    return (d + 1) % 4
+    return (d + 2) % 4
 
 def move(r, c, num):
-    dx = [0, 0, -1, 1]
-    dy = [-1, 1, 0, 0]
-
-    d = direction[num]
-    v = velocity[num]
+    # U, L, D, R
+    dx = [0, -1, 0, 1]
+    dy = [-1, 0, 1, 0]
 
     x, y = c, r
-    for _ in range(v):
-        nx, ny = x + dx[d], y + dy[d]
+    for _ in range(velocity[num]):
+        nx, ny = x + dx[direction[num]], y + dy[direction[num]]
 
         if in_range(nx, ny):
             x, y = nx, ny
         else:
-            direction[num] = change_direction(d)
+            direction[num] = change_direction(direction[num])
             x, y = x + dx[direction[num]], y + dy[direction[num]]
 
     return x, y
@@ -66,10 +66,10 @@ def simulate():
         for c in range(n):
             while len(new_grid[r][c]) > k:
                 del_idx = 0
-                min_val = new_grid[r][c][0]
+                min_val = velocity[new_grid[r][c][0]]
                 for i in range(1, len(new_grid[r][c])):
-                    if new_grid[r][c][i] < min_val:
-                        min_val = grid[r][c][i]
+                    if velocity[new_grid[r][c][i]] < min_val:
+                        min_val = velocity[grid[r][c][i]]
                         del_idx = i
 
                 direction[del_idx] = 'None'
