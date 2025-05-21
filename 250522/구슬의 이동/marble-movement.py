@@ -28,8 +28,6 @@ for num in range(1, m + 1):
     direction.append(direction_mapper[d])
     velocity.append(int(v))
 
-#print_grid()
-
 def in_range(x, y):
     return 0 <= x < n and 0 <= y < n
 
@@ -64,24 +62,19 @@ def simulate():
 
     for r in range(n):
         for c in range(n):
-            while len(new_grid[r][c]) > k:
-                del_idx = 0
-                min_val = velocity[new_grid[r][c][0]]
-                for i in range(1, len(new_grid[r][c])):
-                    if velocity[new_grid[r][c][i]] < min_val:
-                        min_val = velocity[new_grid[r][c][i]]
-                        del_idx = i
+            sorted_marbles = sorted(
+                new_grid[r][c],
+                key=lambda idx: (-velocity[idx], -idx)
+            )
 
-                direction[del_idx] = 'None'
-                velocity[del_idx] = 0
-
-                del new_grid[r][c][del_idx]
+            for idx in sorted_marbles[k:]:
+                direction[idx] = 'None'
+                velocity[idx] = 0
+                new_grid[r][c].remove(idx)
 
     for r in range(n):
         for c in range(n):
             grid[r][c] = new_grid[r][c]
-
-    #print_grid()
 
 for _ in range(t):
     simulate()
