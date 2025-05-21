@@ -67,9 +67,9 @@ def simulate():
             while len(new_grid[r][c]) > k:
                 del_idx = 0
                 min_val = velocity[new_grid[r][c][0]]
-                for i in range(0, len(new_grid[r][c])):
+                for i in range(1, len(new_grid[r][c])):
                     if velocity[new_grid[r][c][i]] < min_val:
-                        min_val = velocity[grid[r][c][i]]
+                        min_val = velocity[new_grid[r][c][i]]
                         del_idx = i
 
                 direction[del_idx] = 'None'
