@@ -9,13 +9,14 @@ pos = [1] * k
 def choose(curr_num):
     global answer
 
-    if curr_num == n + 1:
-        count = 0
-        for p in pos:
-            if p >= m:
-                count += 1
-                
-        answer = max(answer, count)
+    count = 0
+    for p in pos:
+        if p >= m:
+            count += 1
+
+    answer = max(answer, count)
+
+    if curr_num == n + 1 or answer == k:
         return
 
     for i in range(k):
