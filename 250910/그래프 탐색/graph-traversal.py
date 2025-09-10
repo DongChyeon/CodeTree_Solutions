@@ -6,18 +6,17 @@ for _ in range(m):
     graph[v2 - 1].append(v1 - 1)
 
 visited = [False] * n
-
 answer = 0
 
-def dfs(vertex):
+def dfs(vertex):    
     global answer
 
     for curr_v in graph[vertex]:
         if not visited[curr_v]:
-            answer += 1
+            if curr_v != 0:
+                answer += 1
             visited[curr_v] = True
             dfs(curr_v)
 
 dfs(0)
-# 시작점 제외
-print(answer - 1)
+print(answer)
