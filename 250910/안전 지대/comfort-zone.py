@@ -3,7 +3,7 @@ grid = [list(map(int, input().split())) for _ in range(n)]
 visited = [[False] * m for _ in range(n)]
 
 max_safe_area_depth = 0
-max_safe_area_count = 0
+max_safe_area_count = -1
 
 def in_range(x, y):
     return 0 <= x < m and 0 <= y < n
@@ -28,7 +28,12 @@ def dfs(x, y, k):
             visited[ny][nx] = True
             dfs(nx, ny, k)
 
-for k in range(1, 101):
+max_height = 0
+for y in range(n):
+    for x in range(m):
+        max_height = max(max_height, grid[y][x])
+
+for k in range(1, max_height + 1):
     safe_area_count = 0
     visited = [[False] * m for _ in range(n)]
 
@@ -38,9 +43,6 @@ for k in range(1, 101):
                 visited[y][x] = True
                 dfs(x, y, k)
                 safe_area_count += 1
-
-    if safe_area_count == 0:
-        break
 
     if (safe_area_count > max_safe_area_count):
         max_safe_area_count = safe_area_count
