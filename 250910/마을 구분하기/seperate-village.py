@@ -41,7 +41,7 @@ for y in range(n):
 
             dfs(x, y)
 
-people.append(curr_people_count)
+if curr_people_count > 0: people.append(curr_people_count)
 
 print(village_count)
 for count in sorted(people):
