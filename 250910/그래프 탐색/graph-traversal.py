@@ -1,11 +1,12 @@
 n, m = map(int, input().split())
-graph = [[] for _ in range(n)]
+
+graph = [[] for _ in range(n + 1)]
 for _ in range(m):
     v1, v2 = map(int, input().split())
-    graph[v1 - 1].append(v2 - 1)
-    graph[v2 - 1].append(v1 - 1)
+    graph[v1].append(v2)
+    graph[v2].append(v1)
 
-visited = [False] * n
+visited = [False] * (n + 1)
 answer = 0
 
 def dfs(vertex):    
@@ -13,10 +14,11 @@ def dfs(vertex):
 
     for curr_v in graph[vertex]:
         if not visited[curr_v]:
-            if curr_v != 0:
-                answer += 1
             visited[curr_v] = True
+            answer += 1
             dfs(curr_v)
 
-dfs(0)
+visited[1] = True
+dfs(1)
+
 print(answer)
