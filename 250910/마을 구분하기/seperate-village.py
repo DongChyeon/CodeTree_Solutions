@@ -1,23 +1,24 @@
-def print_visited():
-    for row in visited:
-        for col in row:
-            print(col, end=' ')
-        print()
-
 n = int(input())
 grid = [list(map(int, input().split())) for _ in range(n)]
-visited = [[0] * n for _ in range(n)]
+visited = [[False] * n for _ in range(n)]
 
-village_count = 0
-people = []
-curr_people_count = 0
+people_num = 0
+people_nums = list()
 
 def in_range(x, y):
     return 0 <= x < n and 0 <= y < n
 
+def can_go(x, y):
+    if not in_range(x, y):
+        return False
+
+    if visited[y][x] or grid[y][x] == 0:
+        return False
+
+    return True
+
 def dfs(x, y):
-    global village_count
-    global curr_people_count
+    global people_num
 
     dxs = [0, 0, -1, 1]
     dys = [-1, 1, 0, 0]
@@ -25,24 +26,21 @@ def dfs(x, y):
     for dx, dy in zip(dxs, dys):
         nx, ny = x + dx, y + dy
 
-        if in_range(nx, ny) and visited[ny][nx] == 0 and grid[ny][nx] == 1:
-            curr_people_count += 1
-            visited[ny][nx] = village_count
+        if can_go(nx, ny):
+            visited[ny][nx] = True
+            people_num += 1
             dfs(nx, ny)
 
 for y in range(n):
     for x in range(n):
-        if visited[y][x] == 0 and grid[y][x] == 1:
-            if curr_people_count > 0: people.append(curr_people_count)
-            curr_people_count = 1
-
-            village_count += 1
-            visited[y][x] = village_count
+        if can_go(x, y):
+            visited[y][x] = True
+            people_num = 1
 
             dfs(x, y)
 
-if curr_people_count > 0: people.append(curr_people_count)
+            people_nums.append(people_num)
 
-print(village_count)
-for count in sorted(people):
-    print(count)
+print(len(people_nums))
+for num in sorted(people_nums):
+    print(num)
