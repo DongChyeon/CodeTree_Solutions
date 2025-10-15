@@ -31,6 +31,6 @@ def dfs(x, y, dir_num, move_num):
             dfs(nx, ny, move_dir[ny][nx], move_num + 1)
             visited[ny][nx] = False
 
-dfs(r - 1, c - 1, move_dir[r - 1][c - 1], 0)
+dfs(c - 1, r - 1, move_dir[r - 1][c - 1], 0)
 
 print(answer)
