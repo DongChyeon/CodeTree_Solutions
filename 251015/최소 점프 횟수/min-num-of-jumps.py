@@ -11,7 +11,8 @@ def bfs():
             return cnt
         for i in range(num[pos], 0, -1):
             next_pos = pos + i
-            queue.append((next_pos, cnt + 1))
+            if next_pos < n:
+                queue.append((next_pos, cnt + 1))
     
     return -1
 
