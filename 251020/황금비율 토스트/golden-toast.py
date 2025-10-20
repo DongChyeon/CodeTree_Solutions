@@ -92,7 +92,7 @@ for _ in range(m):
     elif cmd[0] == 'D':
         if iterator.next == None:
             continue
-        doublyLinkedList.erase(iterator)
+        iterator = doublyLinkedList.erase(iterator)
     elif cmd[0] == 'P':
         doublyLinkedList.insert(iterator, cmd[1])
 
