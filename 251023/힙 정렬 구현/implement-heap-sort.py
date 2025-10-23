@@ -6,10 +6,10 @@ def heapify(arr, n, i):
     l = i * 2
     r = i * 2 + 1
 
-    if l <= n and largest < arr[l]:
+    if l <= n and arr[largest] < arr[l]:
         largest = l
 
-    if r <= n and largest < arr[r]:
+    if r <= n and arr[largest] < arr[r]:
         largest = r
 
     if largest != i:
