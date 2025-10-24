@@ -41,7 +41,7 @@ def move(marble):
         nx, ny = x, y
     
     if next_marble_index[ny][nx] != BLANK:
-        marble = collide(marbles[next_marble_index[ny][nx]], (num, weight, dir_idx, nx, ny))
+        marble = collide(next_marbles[next_marble_index[ny][nx]], (num, weight, dir_idx, nx, ny))
         next_marbles[next_marble_index[ny][nx]] = marble
     else:
         next_marbles.append((num, weight, dir_idx, nx, ny))
@@ -59,7 +59,7 @@ for _ in range(t):
     for marble in marbles:
         move(marble)
 
-    marbles = next_marbles[:]
+    marbles = next_marbles
 
     for _, _, _, x, y in next_marbles:
         next_marble_index[y][x] = BLANK
