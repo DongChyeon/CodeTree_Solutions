@@ -4,7 +4,7 @@ BLANK = -1
 
 T = int(input())
 dir_mapper = { 'U': 0, 'D': 1, 'R': 2, 'L': 3 }
-next_marbles_index = [[BLANK for _ in range(COORD_SIZE)] for _ in range(COORD_SIZE)]
+next_marbles_index = [[BLANK for _ in range(COORD_SIZE + 1)] for _ in range(COORD_SIZE + 1)]
 
 marbles = []
 next_marbles = []
@@ -36,7 +36,7 @@ def collide(marble1, marble2):
 
 def is_out_of_active_coordinate(marble):
     x, y, _, _, _ = marble
-    return x < 0 or x > COORD_SIZE - 1 or y < 0 or y > COORD_SIZE - 1
+    return x < 0 or x > COORD_SIZE or y < 0 or y > COORD_SIZE
 
 def push_next_marble(marble, curr_time):
     global last_collision_time
