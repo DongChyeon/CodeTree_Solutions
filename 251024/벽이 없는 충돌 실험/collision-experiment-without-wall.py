@@ -1,10 +1,7 @@
+from collections import defaultdict
+
 T = int(input())
-dir_mapper = {
-    'U': 0,
-    'D': 1,
-    'R': 2,
-    'L': 3
-}
+dir_mapper = { 'U': 0, 'D': 1, 'R': 2, 'L': 3 }
 dx = [0, 0, 1, -1]
 dy = [1, -1, 0, 0]
 
@@ -24,22 +21,19 @@ for _ in range(T):
 
     answer = 0
     for t in range(1, 4001):
-        new_positions = { }
-        for (x, y), balls in positions.items():
-            w, seq, dir_idx = balls
+        new_positions = defaultdict(list)
+        for (x, y), (w, seq, dir_idx) in positions.items():
             nx, ny = x + dx[dir_idx], y + dy[dir_idx]
+            new_positions[(nx, ny)].append((w, seq, dir_idx))
 
-            if (nx, ny) not in new_positions:
-                new_positions[(nx, ny)] = (w, seq, dir_idx)
-            else:
+        positions.clear()
+        for (nx, ny), lst in new_positions.items():
+            if len(lst) > 1:
                 answer = t
-
-                cur_w, cur_seq, cur_dir_idx = new_positions[(nx, ny)]
-                if w > cur_w:
-                    new_positions[(nx, ny)] = (w, seq, dir_idx)
-                elif w == cur_w and seq > cur_seq:
-                    new_positions[(nx, ny)] = (w, seq, dir_idx)
-        positions = new_positions
+                w, seq, dir_idx = max(lst, key = lambda b: (b[0], b[1]))
+                positions[(nx, ny)] = (w, seq, dir_idx)
+            else:
+                positions[(nx, ny)] = lst[0]
 
     if answer > 0:
         print(answer)
