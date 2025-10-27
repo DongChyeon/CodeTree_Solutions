@@ -1,8 +1,8 @@
 import kotlin.math.abs
 
 fun main() {
-    val n = readLine()!!.toInt()
-    val nums = readLine()!!.split(" ").map { it.toInt() }
+    val n = readLine()!!.trim().toInt()
+    val nums = readLine()!!.trim().split(" ").map { it.toInt() }
     val sumOfNums = nums.sum()
 
     var answer = sumOfNums
