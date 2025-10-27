@@ -45,10 +45,8 @@ fun main() {
             val (coinNumber, coinX, coinY) = coinPosition
             if (coinNumber <= lastCoinNumber) continue
 
-            if (9 - coinNumber >= 3 - coinCount) {
-                val distanceToCoin = getDistanceFromHere(x, y, coinX, coinY)
-                dfs(coinX, coinY, move + distanceToCoin, coinCount + 1, coinNumber)
-            }
+            val distanceToCoin = getDistanceFromHere(x, y, coinX, coinY)
+            dfs(coinX, coinY, move + distanceToCoin, coinCount + 1, coinNumber)
         }
     }
 
