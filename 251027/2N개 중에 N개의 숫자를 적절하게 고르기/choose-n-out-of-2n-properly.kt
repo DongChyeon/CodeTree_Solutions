@@ -18,7 +18,7 @@ fun main() {
 
         for (i in start until nums.size) {
             val targetNum = nums[i]
-            dfs(start, num + targetNum, depth + 1)
+            dfs(i + 1, num + targetNum, depth + 1)
         }
     }
 
