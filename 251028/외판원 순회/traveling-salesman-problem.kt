@@ -29,7 +29,9 @@ fun main() {
 
     fun choose(depth: Int) {
         if (depth == n) {
-            answer = min(answer, getCost())
+            if (cost[choosedPlaces.last()][0] != 0) {
+                answer = min(answer, getCost())
+            }
             return
         }
 
