@@ -1,8 +1,8 @@
 import kotlin.math.max
 
 fun main() {
-    val n = readLine()!!.toInt()
-    val grid = Array(n) { readLine()!!.split(" ").map { it.toInt() } }
+    val n = readLine()!!.trim().toInt()
+    val grid = Array(n) { readLine()!!.trim().split(" ").map { it.toInt() } }
     val visited = BooleanArray(n) { false }
 
     val choosedTiles: MutableList<Int> = mutableListOf()
