@@ -34,7 +34,8 @@ fun main() {
         }
 
         for (i in 1 until n) {
-            if (visited[i]) continue
+            val lastPlace = choosedPlaces.last() ?: 0
+            if (visited[i] || cost[lastPlace][i] == 0) continue
 
             choosedPlaces.add(i)
             visited[i] = true
