@@ -33,7 +33,7 @@ fun main() {
     val startPos = mutableListOf<Pair<Int, Int>>()
     repeat(k) {
         val (r, c) = readln().trim().split(" ").map { it.toInt() }
-        startPos.add(c - 1 to r - 1)
+        startPos.add(r - 1 to c - 1)
     }
 
     fun isInRange(x: Int, y: Int) : Boolean { 
