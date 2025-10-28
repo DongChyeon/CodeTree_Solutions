@@ -11,7 +11,7 @@ fun main() {
     fun isInRange(x: Int, y: Int) : Boolean {
         return x in 0 until m && y in 0 until n
     }
-    
+
     // 녹인 얼음 반환
     fun melt(startX: Int, startY: Int) : MutableSet<Pair<Int, Int>> {
         val queue: Queue<Pair<Int, Int>> = LinkedList()
@@ -36,19 +36,20 @@ fun main() {
             }
         }
 
+        for (y in 0 until n) {
+            for (x in 0 until m) {
+                if (visited[y][x]) visited[y][x] = false
+            }
+        }
+
         return meltedIces
     }
 
     var remainCount = grid.sumOf { row -> row.count { it == 1 } }
-    var (startX, startY) = Pair(0, 0)
 
     for (time in 1 until 201) {
-        val meltedIces = melt(startX, startY)
+        val meltedIces = melt(0, 0)
         for ((x, y) in meltedIces) grid[y][x] = 0
-
-        startX = meltedIces.first().first
-        startY = meltedIces.first().second
-
         remainCount -= meltedIces.size
 
         if (remainCount == 0) {
