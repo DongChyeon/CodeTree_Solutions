@@ -66,8 +66,8 @@ fun main() {
         endY = ny
         //println("${grid[endY][endX]} ${endY + 1} ${endX + 1}")
 
-        if (startX == endX && startY == endY) {
-            println("${endY + 1} ${endX + 1}")
+        if (endX == -1 && endX == -1) {
+            println("${startY + 1} ${startX + 1}")
             return
         }
 
