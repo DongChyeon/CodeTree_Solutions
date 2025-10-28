@@ -2,8 +2,8 @@ import kotlin.math.max
 import kotlin.math.min
 
 fun main() {
-    val n = readLine()!!.toInt()
-    val grid = List(n) { readln().split(" ").map { it.toInt() } }
+    val n = readLine()!!.trim().toInt()
+    val grid = List(n) { readln().trim().split(" ").map { it.toInt() } }
 
     var answer = 0
     val visited = BooleanArray(n) { false }
