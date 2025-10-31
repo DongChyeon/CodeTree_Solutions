@@ -3,37 +3,50 @@ import kotlin.math.min
 
 fun main() {
     val n = readln().trim().toInt()
-    val grid = Array(n) { readln().trim().split(" ").map { it.toInt() } }
-    val dp = Array(n) { Array(n) { Triple(100, 0, 100) } } // 최대-최소, 최대, 최소
-    dp[0][0] = Triple(0, grid[0][0], grid[0][0])
+    val grid = Array(n) { readln().trim().split(" ").map { it.toInt() }.toIntArray() }
+    val dp = Array(n) { IntArray(n) { Int.MAX_VALUE } }
 
-    for (x in 1 until n) {
-        val maxVal = max(dp[0][x - 1].second, grid[0][x])
-        val minVal = min(dp[0][x - 1].third, grid[0][x])
-        dp[0][x] = Triple(maxVal - minVal, maxVal, minVal)
-    }
-    for (y in 1 until n) {
-        val maxVal = max(dp[y - 1][0].second, grid[y][0])
-        val minVal = min(dp[y - 1][0].third, grid[y][0])
-        dp[y][0] = Triple(maxVal - minVal, maxVal, minVal)
-    }
-
-    for (y in 1 until n) {
-        for (x in 1 until n) {
-            val candidates = mutableListOf<Triple<Int, Int, Int>>()
-            val fromUp = max(dp[y - 1][x].second, grid[y][x]) - min(dp[y - 1][x].third, grid[y][x])
-            val fromLeft = max(dp[y][x - 1].second, grid[y][x]) - min(dp[y][x - 1].third, grid[y][x])
-
-            candidates.add(Triple(fromUp, max(dp[y - 1][x].second, grid[y][x]), min(dp[y - 1][x].third, grid[y][x])))
-            candidates.add(Triple(fromLeft, max(dp[y][x - 1].second, grid[y][x]), min(dp[y][x - 1].third, grid[y][x])))
-            
-            dp[y][x] = candidates.sortedWith(
-                compareBy<Triple<Int, Int, Int>> { it.first }
-                    .thenBy { it.second }
-                    .thenByDescending { it.third }
-            ).first()
+    fun initialize() {
+        for (y in 0 until n) {
+            for (x in 0 until n) {
+                dp[y][x] = Int.MAX_VALUE
+            }
         }
+
+        dp[0][0] = grid[0][0]
+
+        for (y in 1 until n) dp[y][0] = max(dp[y - 1][0], grid[y][0])
+        for (x in 1 until n) dp[0][x] = max(dp[0][x - 1], grid[0][x])
     }
 
-    println(dp[n - 1][n - 1].first)
+    fun solve(lowerBound: Int) : Int {
+        for (y in 0 until n) {
+            for (x in 0 until n) {
+                if (grid[y][x] < lowerBound) grid[y][x] = Int.MAX_VALUE
+            }
+        }
+
+        initialize()
+
+        for (y in 1 until n) {
+            for (x in 1 until n) {
+                dp[y][x] = max(min(dp[y - 1][x], dp[y][x - 1]), grid[y][x])
+            }
+        }
+
+        return dp[n - 1][n - 1];
+    }
+
+    var answer = 100
+    val maxVal = grid.maxOf { row -> row.maxOrNull()!! }
+
+    for (lowerBound in 1 until maxVal + 1) {
+        val upperBound = solve(lowerBound)
+
+        if (upperBound == Int.MAX_VALUE) continue
+
+        answer = min(answer, upperBound - lowerBound)
+    }
+
+    println(answer)
 }
