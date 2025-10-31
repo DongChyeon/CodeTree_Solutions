@@ -20,14 +20,18 @@ fun main() {
 
     for (y in 1 until n) {
         for (x in 1 until n) {
+            val candidates = mutableListOf<Triple<Int, Int, Int>>()
             val fromUp = max(dp[y - 1][x].second, grid[y][x]) - min(dp[y - 1][x].third, grid[y][x])
             val fromLeft = max(dp[y][x - 1].second, grid[y][x]) - min(dp[y][x - 1].third, grid[y][x])
 
-            if (fromUp > fromLeft) {
-                dp[y][x] = Triple(fromLeft, max(dp[y][x - 1].second, grid[y][x]), min(dp[y][x - 1].third, grid[y][x]))
-            } else {
-                dp[y][x] = Triple(fromUp, max(dp[y - 1][x].second, grid[y][x]), min(dp[y - 1][x].third, grid[y][x]))
-            }
+            candidates.add(Triple(fromUp, max(dp[y - 1][x].second, grid[y][x]), min(dp[y - 1][x].third, grid[y][x])))
+            candidates.add(Triple(fromLeft, max(dp[y][x - 1].second, grid[y][x]), min(dp[y][x - 1].third, grid[y][x])))
+            
+            dp[y][x] = candidates.sortedWith(
+                compareBy<Triple<Int, Int, Int>> { it.first }
+                    .thenBy { it.second }
+                    .thenByDescending { it.third }
+            ).first()
         }
     }
 
