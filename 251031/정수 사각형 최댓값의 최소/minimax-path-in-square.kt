@@ -6,7 +6,7 @@ fun main() {
     val matrix = List(n) { readln().trim().split(" ").map { it.toInt() } }
     val dp = Array(n) { IntArray(n) { 1000000 } }
 
-    dp[0][0] = matrix[y][x]
+    dp[0][0] = matrix[0][0]
     for (x in 1 until n) dp[0][x] = max(dp[0][x - 1], matrix[0][x])
     for (y in 1 until n) dp[y][0] = max(dp[y - 1][0], matrix[y][0])
 
