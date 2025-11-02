@@ -6,11 +6,9 @@ fun main() {
 
     val dp = List(n + 1) { IntArray(4) { 0 }}
 
-    for (j in 1 until 4) {
-        dp[1][j] = coins[0]
-        dp[2][j] = dp[1][j - 1] + coins[1]
-    }
+    dp[1][1] = coins[0]
     dp[2][0] = coins[1]
+    dp[2][2] = dp[1][1] + coins[1]
 
     for (i in 3 until n + 1) {
         for (j in 0 until 4) {
