@@ -6,10 +6,16 @@ fun main() {
 
     val dp = List(n + 1) { IntArray(4) { 0 }}
 
-    for (i in 1 until n + 1) {
+    for (j in 1 until 4) {
+        dp[1][j] = coins[0]
+        dp[2][j] = dp[1][j - 1] + coins[1]
+    }
+    dp[2][0] = coins[1]
+
+    for (i in 3 until n + 1) {
         for (j in 0 until 4) {
-            if (j > 0 && i >= j) dp[i][j] = dp[i - 1][j - 1] + coins[i - 1]
-            if (i > 1) dp[i][j] = max(dp[i][j], dp[i - 2][j] + coins[i - 2])
+            if (dp[i - 2][j] != 0) dp[i][j] = max(dp[i][j],dp[i - 2][j] + coins[i - 1])
+            if (j >= 1 && dp[i - 1][j - 1] != 0) dp[i][j] = max(dp[i][j], dp[i - 1][j - 1] + coins[i - 1])
         }
     }
 
