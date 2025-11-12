@@ -12,11 +12,10 @@ fun main() {
         for (j in 0 until i) {
             if (sequence[i] > sequence[j]) {
                 dp[i] = max(dp[i], dp[j] + 1)
-            } else {
-                dp[i] = max(dp[i], dp[j])
             }
         }
     }
 
-    println(dp[n - 1])
+    //println(dp.joinToString(" "))
+    println(dp.maxOrNull()!!)
 }
