@@ -1,8 +1,8 @@
 import kotlin.math.max
 
 fun main() {
-    val n = readLine()!!.toInt()
-    val sequence = readln().split(" ").map { it.toInt() }
+    val n = readLine()!!.trim().toInt()
+    val sequence = readln().trim().split(" ").map { it.toInt() }
     val dp = IntArray(n) { 0 }
     dp[0] = 1
 
