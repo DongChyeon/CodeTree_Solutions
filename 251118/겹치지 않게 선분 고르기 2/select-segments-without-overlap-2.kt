@@ -9,11 +9,12 @@ fun main() {
     )
 
     var answer = 1
+    var minX2 = segments[0].second
     for (i in 1 until n) {
-        val (x1, x2) = segments[0]
-        val (nx1, nx2) = segments[i]
-
-        if (nx1 > x2) answer += 1
+        if (segments[i].first > minX2) {
+            answer += 1
+            minX2 = segments[i].second
+        }
     }
 
     println(answer)
