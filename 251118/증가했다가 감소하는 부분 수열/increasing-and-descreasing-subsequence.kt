@@ -23,7 +23,13 @@ fun main() {
 
     val ascendingEndIndex = dp1.indexOf(maxAscendingSequenceValue)
 
-    for (i in 0 until n) dp2[i] = 1
+    if (ascendingEndIndex == n - 1) {
+        println(max(maxAscendingSequenceValue, maxDescendingSequenceValue))
+        return
+    }
+
+    for (i in 0 until n) dp2[i] = 0
+    dp2[ascendingEndIndex + 1] = 1
 
     for (i in ascendingEndIndex + 2 until n) {
         for (j in 0 until i) {
@@ -32,9 +38,6 @@ fun main() {
             }
         }
     }
-
-    //println(dp1.joinToString(" "))
-    //println(dp2.joinToString(" "))
 
     var answer = max(
         maxAscendingSequenceValue + dp2[n - 1],
